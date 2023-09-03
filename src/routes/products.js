@@ -3,7 +3,7 @@ import {
 } from 'express';
 import {
     productModel
-} from '../models/product.js';
+} from '../dao/models/product.js';
 
 const router = Router();
 
