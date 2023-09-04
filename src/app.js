@@ -2,14 +2,12 @@ import express from 'express';
 import __dirName from './utils.js';
 import path from 'path'; // Importa el módulo path
 import handlebars from 'express-handlebars';
-import userRouter from './routes/products.js';
+import productRouter from './routes/products.js';
+import cartRouter from './routes/carts.js'
 import viewsRouter from './routes/views.js';
 import mongoose from 'mongoose';
 import { Server } from "socket.io";
-
-import {
-    chatModel
-} from './dao/models/chat.js';
+import { chatModel } from './dao/models/chat.js';
 
 const app = express();
 const port = 8080;
@@ -24,10 +22,21 @@ app.use(express.static(__dirName + '/public'));
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/', viewsRouter);
+app.use('/api/products', productRouter);
+app.use('/api/carts', cartRouter);
 
-app.use('/api/products', userRouter);
+
 
 mongoose.connect('mongodb+srv://estebangonzalezd:coder1234@clusterestebangonzalezd.wuhulk1.mongodb.net/Ecommerce');
+
+app.use((err, req, res, next) => {
+    console.error('Error no manejado:', err);
+    res.status(500).json({
+        status: "Error",
+        error: 'Se produjo un error inesperado'
+    });
+});
+
 
 const server = app.listen(port, () => {
     console.log(`Server ON en puerto ${port}`);
