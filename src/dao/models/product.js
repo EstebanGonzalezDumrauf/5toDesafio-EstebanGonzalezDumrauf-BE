@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 
-const productCollection = 'productos';
+const productCollection = 'products';
 
 const productSchema = new mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId, //////////VER SI FUNCIONA
+    //_id: mongoose.Schema.Types.ObjectId, //////////VER SI FUNCIONA
     title: String,
     description: String,
     price: Number,
