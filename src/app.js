@@ -7,6 +7,10 @@ import viewsRouter from './routes/views.js';
 import mongoose from 'mongoose';
 import { Server } from "socket.io";
 
+import {
+    chatModel
+} from './dao/models/chat.js';
+
 const app = express();
 const port = 8080;
 
@@ -35,12 +39,29 @@ let messages = [];
 io.on('connection', socket => {
     console.log('Nuevo cliente conectado');
 
-    socket.on('message', data => {
+    socket.on('message', async data => {
         messages.push(data);
-        io.emit('messageLogs', messages);
+
+    try {
+        const { user, message } = data;
+        const chatMessage = new chatModel({
+            user,
+            message
+        });
+
+        //Se persiste en Mongo
+        const result = await chatMessage.save();
+
+        console.log(`Mensaje de ${user} persistido en la base de datos.`);
+    } catch (error) {
+        console.error('Error al persistir el mensaje:', error);
+    }
+
+    io.emit('messageLogs', messages);
     })
 
     socket.on('authenticated', data => {
         socket.broadcast.emit('newUserConnected', data);
     })
+
 })

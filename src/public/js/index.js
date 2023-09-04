@@ -2,18 +2,16 @@ const socket = io();
 let user;
 let chatBox = document.getElementById('chatBox');
 
-Swal.fire({
-    title: "Identificate",
-    input: "text",
-    text: "Ingresa el Usuario para Identificarte",
-    inputValidator: (value) => {
-        return !value && 'Necesitas ingresar un nombre de usuario'
-    },
-    allowOutsideClick: false,
+const { value: email } = Swal.fire({
+    title: 'Identificate',
+    input: 'email',
+    inputLabel: 'Ingresa tu e-mail para Identificarte',
+    inputPlaceholder: 'Direccion de Email'
 }).then(result => {
     user = result.value
     socket.emit('authenticated', user);
 })
+
 
 chatBox.addEventListener('keyup', evt => {
     if (evt.key === "Enter") {
@@ -27,6 +25,7 @@ chatBox.addEventListener('keyup', evt => {
 socket.on('messageLogs', data =>{
     let log = document.getElementById('messageLogs');
     let messages = "";
+
     data.forEach(message => {
         messages = messages + `${message.user} dice ${message.message} </br>` ;
     });
