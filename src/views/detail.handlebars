@@ -1,0 +1,15 @@
+<div class="product-detail-container">
+    <div class="product-detail-text">
+        <h1 class="product-detail-title">{{product.title}}</h1>
+        <p class="product-detail-description">{{product.description}}</p>
+        <p class="product-detail-price"><strong>Precio:</strong> ${{product.price}}</p>
+
+        <form action="{{cartUrl}}" method="post">
+            <input type="hidden" name="productId" value="{{product._id}}">
+            <button class="add-to-cart-button" type="submit">Agregar al Carrito</button>
+        </form>
+    </div>
+    <div>
+        <img src="{{product.thumbnail}}" alt="Imagen del producto" class="product-detail-image">
+    </div>
+</div>

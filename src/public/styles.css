@@ -1,0 +1,143 @@
+/* styles.css */
+.product-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #fff;
+}
+
+.product-details {
+    flex: 1;
+}
+
+.product-title {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.product-price {
+    font-size: 16px;
+    color: #ff6600; /* Color naranja para el precio */
+}
+
+.product-image {
+    max-width: 100px; /* Define el ancho máximo de la imagen */
+    max-height: 100px; /* Define la altura máxima de la imagen */
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+
+.product-button {
+    /*background-color: #ff6600;
+    color: #fff;*/
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.pagination-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination-button {
+    background-color: #007bff; /* Color azul para los botones de paginación */
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 5px;
+}
+
+.pagination-button:hover {
+    background-color: #0056b3; /* Cambia de color al pasar el mouse */
+}
+
+
+/* Estilo para el contenedor principal */
+.product-detail-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    display: flex; /* Utiliza flexbox para alinear elementos */
+    align-items: center; /* Alinea verticalmente los elementos al centro */
+    justify-content: space-between; /* Distribuye los elementos horizontalmente */
+    /*
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9; */
+}
+
+/* Estilo para el div del texto */
+.product-detail-text {
+    flex: 1; /* Hace que este div tome todo el espacio restante */
+}
+
+/* Estilo para el título del producto */
+.product-detail-title {
+    font-size: 35px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Estilo para la descripción del producto */
+.product-detail-description {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* Estilo para el precio del producto */
+.product-detail-price {
+    font-size: 35px;
+    font-weight: bold;
+    color: #e91e63; /* Color de precio personalizable */
+}
+
+/* Estilo para la imagen del producto */
+.product-detail-image {
+    width: 500px; /* Define el ancho fijo deseado */
+    height: auto; /* Autoajusta la altura para mantener la proporción original */
+    display: block;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Efecto sombra */
+    /*
+    width: 500px; 
+    height: auto; 
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);  */
+}
+
+
+/* Estilo para el botón "Agregar al Carrito" */
+.add-to-cart-button {
+    background-color: #e91e63; /* Color de fondo personalizable */
+    color: #fff; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno del botón */
+    font-size: 18px; /* Tamaño de fuente */
+    border: none; /* Elimina el borde */
+    border-radius: 5px; /* Borde redondeado */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    transition: background-color 0.3s ease; /* Transición de color de fondo */
+}
+
+/* Estilo para el botón al pasar el mouse por encima */
+.add-to-cart-button:hover {
+    background-color: #51c51b; /* Color de fondo al pasar el mouse por encima */
+}
