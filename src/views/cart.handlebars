@@ -1,0 +1,22 @@
+<div>
+    {{#each cartProducts}}
+    <div class="product-container">
+        <div class="product-details">
+            <p class="product-title">{{this.product.title}}</p>
+            <p class="product-price"><strong>Precio:</strong> ${{this.product.price}}</p>
+            <p class="product-quantity"><strong>Cantidad:</strong> {{this.quantity}}</p>
+        </div>
+
+        <form action="/api/cart/remove/{{this.product._id}}" method="delete">
+            <button class="remove-from-cart-button" type="submit">Eliminar del Carrito</button>
+        </form>
+
+        <!-- Si tienes imágenes de productos en el carrito, puedes mostrarlas aquí -->
+        <div class="product-images">
+            {{#each this.product.thumbnail}}
+            <img src="{{this}}" alt="Imagen del producto" class="product-image">
+            {{/each}}
+        </div>
+    </div>
+    {{/each}}
+</div>

@@ -72,5 +72,15 @@ router.get('/api/products/:pid', async (req, res) => {
     }
 });
 
+router.get('/carts/:cid', async (req, res) => {
+    try {
+        const carrito = await cartModel.findById(cid);
+        res.render('cart', {
+            cartProducts: carrito.arrayCart // Pasamos solo la matriz de productos
+        });
+    } catch (error) {
+        console.log(error);
+    }
+})
 
 export default router;

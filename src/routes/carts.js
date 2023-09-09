@@ -7,6 +7,7 @@ import {
 import {
     productModel
 } from '../dao/models/product.js';
+import mongoose from 'mongoose';
 
 
 const router = Router();
@@ -26,8 +27,6 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const { arrayCart } = req.body;
-
-
 
         console.log('Datos recibidos:', req.body);
 
@@ -53,25 +52,27 @@ router.post('/', async (req, res) => {
 
 
 
-router.post('/:cid/product/:pid', async (req, res) => {
+router.put('/:cid/products/:pid', async (req, res) => {
     try {
         const { cid, pid } = req.params;
+        const { quantity } = req.body;
         // console.log('Datos recibidos:', req.params);
         // console.log('Datos transformados:', cid, pid);
+        const productId = new mongoose.Types.ObjectId(pid);
 
         // Buscar el carrito por su ID
         const cartExistente = await cartModel.findById(cid);
 
         // Verifica si el producto ya está en el carrito
         if (cartExistente && Array.isArray(cartExistente.arrayCart)) {
-            const productoEnCarrito = cartExistente.arrayCart.find(elto => elto.product === pid);
+            const productoEnCarrito = cartExistente.arrayCart.find(elto => elto.product.equals(productId)); // Comparar utilizando .equals()
 
             if (productoEnCarrito) {
-                // Si ya existe, agrego 1
-                productoEnCarrito.quantity += 1;
+                // Si ya existe, agregar la cantidad proporcionada en el cuerpo
+                productoEnCarrito.quantity = quantity;
             } else {
-                // Si el producto no está en el carrito, lo agrego con cantidad 1
-                cartExistente.arrayCart.push({ product: pid, quantity: 1 });
+                // Si el producto no está en el carrito, agregarlo con la cantidad proporcionada en el cuerpo
+                cartExistente.arrayCart.push({ product: productId, quantity: quantity });
             }
 
             // Guardar el carrito actualizado
@@ -106,8 +107,8 @@ router.put('/:cid', async (req, res) => {
 
         console.log('Datos recibidos:', req.body);
 
-        let result = await cartModel.updateOne({
-            _id: cid
+        let result = await cartModel.updateOne({ //RECORDAR QUE ESTE UPDATE NO AGREGA PRODUCTOS A LOS YA EXISTENTES
+            _id: cid                               //PISA EL LISTADO DE PRODUCTOS CON UNO NUEVO
         }, arrayCart);
 
         res.send({
@@ -123,20 +124,60 @@ router.put('/:cid', async (req, res) => {
 
 })
 
-router.delete('/:pid', async (req, res) => {
+router.delete('/:cid', async (req, res) => {
 
+    //ESTO FUNCIONABA Y BORRABA EL CART COMPLETO
+    // let {
+    //     pid
+    // } = req.params;
+
+    // let result = await cartModel.deleteOne({
+    //     _id: pid
+    // });
+
+    // res.send({
+    //     result: 'sucess',
+    //     payload: result
+    // });
+
+    //AHORA EL DELETE DEBE VACIAR EL CART
     let {
-        pid
+        cid
     } = req.params;
 
-    let result = await cartModel.deleteOne({
-        _id: pid
-    });
+    const result = await cartModel.updateOne(
+        { _id: cid },
+        { $set: { arrayCart: [] } }
+    );
 
     res.send({
         result: 'sucess',
         payload: result
     });
 })
+
+router.delete('/:cid/products/:pid', async (req, res) => {
+    try {
+        const { pid, cid } = req.params;
+
+        const result = await cartModel.updateOne(
+            { _id: cid },
+            { $pull: { arrayCart: { product: pid } } } //RECORDAR QUE ESTE PID ES EL ID DEL PRODUCT DE NUESTRO ESQUEMA
+        );                                              //NO ES EL ID GENERADO POR MONGO
+
+        res.send({
+            result: 'success',
+            payload: result
+        });
+    } catch (error) {
+        console.error('Error:', error);
+        res.send({
+            status: 'Error',
+            error: 'Se produjo un error fatal'
+        });
+    }
+});
+
+
 
 export default router;
