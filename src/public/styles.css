@@ -29,8 +29,15 @@
     max-height: 100px; /* Define la altura máxima de la imagen */
     margin-left: 20px;
     margin-right: 20px;
+
+    /* Ajustar margen entre las imágenes */
+    vertical-align: middle; /* Opcional: para alinear verticalmente las imágenes */
 }
 
+.product-images {
+    /* Alinear las imágenes en línea horizontalmente */
+    text-align: center;
+}
 
 .product-button {
     /*background-color: #ff6600;

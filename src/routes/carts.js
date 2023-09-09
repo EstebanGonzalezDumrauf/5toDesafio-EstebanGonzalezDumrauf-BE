@@ -25,28 +25,32 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        let {
-            arrayCart
-        } = req.body;
+        const { arrayCart } = req.body;
+
+
 
         console.log('Datos recibidos:', req.body);
 
-        let result = await cartModel.create({
-            arrayCart
-        });
+        // Agrega un registro de consola para verificar arrayCart antes de la creación
+        console.log('arrayCart:', arrayCart);
+
+        let result = await cartModel.create({arrayCart});
+
+        console.log('Resultado de la creación del carrito:', result);
 
         res.send({
             result: 'sucess',
             payload: result
         });
     } catch (error) {
+        console.error('Error:', error);
         res.send({
             status: "Error",
             error: 'Se produjo un error fatal'
         });
     }
+});
 
-})
 
 
 router.post('/:cid/product/:pid', async (req, res) => {
