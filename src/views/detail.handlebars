@@ -9,7 +9,9 @@
             <button class="add-to-cart-button" type="submit">Agregar al Carrito</button>
         </form>
     </div>
-    <div>
-        <img src="{{product.thumbnail}}" alt="Imagen del producto" class="product-detail-image">
+    <div class="product-images">
+        {{#each product.thumbnail}}
+            <img src="{{this}}" alt="Imagen del producto" class="product-detail-image">
+        {{/each}}
     </div>
 </div>

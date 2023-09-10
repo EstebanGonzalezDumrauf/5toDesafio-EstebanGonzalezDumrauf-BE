@@ -4,6 +4,10 @@ import {
 import {
     productModel
 } from '../dao/models/product.js';
+import {
+    cartModel
+} from '../dao/models/cart.js';
+
 
 const router = Router();
 
@@ -74,13 +78,15 @@ router.get('/api/products/:pid', async (req, res) => {
 
 router.get('/carts/:cid', async (req, res) => {
     try {
-        const carrito = await cartModel.findById(cid);
+        const { cid } = req.params;
+        let carrito = await cartModel.findOne({ _id: cid }).populate('arrayCart.product');
         res.render('cart', {
-            cartProducts: carrito.arrayCart // Pasamos solo la matriz de productos
+            cartProducts: carrito
         });
     } catch (error) {
         console.log(error);
     }
-})
+});
+
 
 export default router;

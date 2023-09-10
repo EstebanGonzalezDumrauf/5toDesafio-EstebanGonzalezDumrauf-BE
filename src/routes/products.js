@@ -57,7 +57,6 @@ router.get('/', async (req, res) => {
             limit = 10, page = 1, query, sort
         } = req.query;
 
-        // Parsea limit y page a números
         const parsedLimit = parseInt(limit);
         const parsedPage = parseInt(page);
 
@@ -75,34 +74,41 @@ router.get('/', async (req, res) => {
             page: parsedPage,
         };
 
-        // Aplica el filtro si se proporciona el parámetro "query"
-        if (query) {
-            options.query = {
-                /* Define aquí tu filtro en función de "query" */ };
-        }
-
         // Aplica la ordenación si se proporciona el parámetro "sort"
         if (sort) {
             if (sort === 'asc') {
                 options.sort = {
                     price: 1
-                }; // Ascendente
+                };
             } else if (sort === 'desc') {
                 options.sort = {
                     price: -1
-                }; // Descendente
-            } 
-            // else {
-            //     return res.status(400).json({
-            //         result: 'error',
-            //         message: 'El parámetro "sort" debe ser "asc" o "desc"'
-            //     });
-            // }
+                };
+            }
         }
 
+        console.log("Valor de query:", options);
+        //const productos = await productModel.paginate({ category: { '$regex': /cuidado/i } }, options);
 
-        // Realiza la búsqueda en la base de datos con las opciones construidas
-        const productos = await productModel.paginate({}, options);
+
+        let productos = {};
+        const strQuery = req.query.query; // Obtén el valor del parámetro "query" desde la solicitud
+
+        if (!isNaN(strQuery)) {
+            // Si "strQuery" es un número, filtrar por stock
+            productos = await productModel.paginate({
+                stock: {
+                    $gt: parseInt(strQuery)
+                }
+            }, options);
+        } else {
+            // Si "strQuery" no es un número, filtrar por categoría
+            productos = await productModel.paginate({
+                category: {
+                    $regex: new RegExp(strQuery, 'i')
+                }
+            }, options);
+        }
 
         res.status(200).json({
             result: 'success',
