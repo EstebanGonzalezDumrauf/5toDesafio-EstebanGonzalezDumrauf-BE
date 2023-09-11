@@ -25,6 +25,9 @@
         {{#if hasPrevPage}}
         <a href="/products?page={{prevPage}}" class="pagination-button">Anterior</a>
         {{/if}}
+        {{#each pageNumbers}}
+        <a href="/products?page={{this}}" class="pagination-button">{{this}}</a>
+        {{/each}}
         {{#if hasNextPage}}
         <a href="/products?page={{nextPage}}" class="pagination-button">Siguiente</a>
         {{/if}}

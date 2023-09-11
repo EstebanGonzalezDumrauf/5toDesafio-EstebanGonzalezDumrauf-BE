@@ -18,6 +18,7 @@ router.get('/products', async (req, res) => {
 
     const {
         docs,
+        totalPages,
         hasPrevPage,
         hasNextPage,
         nextPage,
@@ -30,15 +31,18 @@ router.get('/products', async (req, res) => {
     const prevLink = hasPrevPage ? `/products?page=${prevPage}` : null;
     const nextLink = hasNextPage ? `/products?page=${nextPage}` : null;
 
+    const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
     res.render('index', {
         docs,
+        totalPages,
         hasPrevPage,
         hasNextPage,
         nextPage,
         prevPage,
         prevLink,
-        nextLink
+        nextLink,
+        pageNumbers
     });
 })
 
@@ -83,7 +87,7 @@ router.get('/carts/:cid', async (req, res) => {
         let totalCarrito = 0;
 
         const cartItems = carrito.arrayCart.map(item => {
-            const subtotal = item.quantity * item.product.price; // Calcula el subtotal
+            const subtotal = item.quantity * item.product.price;
             totalCarrito += subtotal;
             return {
                 title: item.product.title,
@@ -91,8 +95,7 @@ router.get('/carts/:cid', async (req, res) => {
                 quantity: item.quantity,
                 id: item._id,
                 thumbnail: item.product.thumbnail,
-                subtotal: subtotal, // Agrega el subtotal
-                // Agrega más campos si los necesitas
+                subtotal: subtotal,
             };
         });
 

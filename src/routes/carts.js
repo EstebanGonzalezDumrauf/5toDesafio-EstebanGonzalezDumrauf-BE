@@ -28,10 +28,8 @@ router.post('/', async (req, res) => {
     try {
         const { arrayCart } = req.body;
 
-        console.log('Datos recibidos:', req.body);
-
-        // Agrega un registro de consola para verificar arrayCart antes de la creación
-        console.log('arrayCart:', arrayCart);
+        // console.log('Datos recibidos:', req.body);
+        // console.log('arrayCart:', arrayCart);
 
         let result = await cartModel.create({arrayCart});
 

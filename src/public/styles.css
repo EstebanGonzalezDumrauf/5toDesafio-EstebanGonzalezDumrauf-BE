@@ -99,12 +99,6 @@
     display: flex; /* Utiliza flexbox para alinear elementos */
     align-items: center; /* Alinea verticalmente los elementos al centro */
     justify-content: space-between; /* Distribuye los elementos horizontalmente */
-    /*
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    background-color: #f9f9f9; */
 }
 
 /* Estilo para el div del texto */
@@ -138,13 +132,6 @@
     height: auto; /* Autoajusta la altura para mantener la proporción original */
     display: block;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Efecto sombra */
-    /*
-    width: 500px; 
-    height: auto; 
-    display: block;
-    margin: 0 auto;
-    margin-top: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);  */
 }
 
 

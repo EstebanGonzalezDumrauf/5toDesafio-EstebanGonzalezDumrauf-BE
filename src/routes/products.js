@@ -60,7 +60,6 @@ router.get('/', async (req, res) => {
         const parsedLimit = parseInt(limit);
         const parsedPage = parseInt(page);
 
-        // Verifica si limit y page son números válidos
         if (isNaN(parsedLimit) || isNaN(parsedPage) || parsedLimit <= 0 || parsedPage <= 0) {
             return res.status(400).json({
                 result: 'error',
@@ -68,13 +67,11 @@ router.get('/', async (req, res) => {
             });
         }
 
-        // Construye el objeto de opciones de búsqueda basado en los parámetros
         const options = {
             limit: parsedLimit,
             page: parsedPage,
         };
 
-        // Aplica la ordenación si se proporciona el parámetro "sort"
         if (sort) {
             if (sort === 'asc') {
                 options.sort = {
@@ -87,22 +84,16 @@ router.get('/', async (req, res) => {
             }
         }
 
-        console.log("Valor de query:", options);
-        //const productos = await productModel.paginate({ category: { '$regex': /cuidado/i } }, options);
-
-
         let productos = {};
-        const strQuery = req.query.query; // Obtén el valor del parámetro "query" desde la solicitud
+        const strQuery = req.query.query;
 
         if (!isNaN(strQuery)) {
-            // Si "strQuery" es un número, filtrar por stock
             productos = await productModel.paginate({
                 stock: {
                     $gt: parseInt(strQuery)
                 }
             }, options);
         } else {
-            // Si "strQuery" no es un número, filtrar por categoría
             productos = await productModel.paginate({
                 category: {
                     $regex: new RegExp(strQuery, 'i')
@@ -122,7 +113,6 @@ router.get('/', async (req, res) => {
         });
     }
 });
-
 
 
 router.get('/:pid', async (req, res) => {
@@ -155,7 +145,6 @@ router.get('/:pid', async (req, res) => {
 
 
 router.post('/', async (req, res) => {
-
     try {
         let {
             title,
