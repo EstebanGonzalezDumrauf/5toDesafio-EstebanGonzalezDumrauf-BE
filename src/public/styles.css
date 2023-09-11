@@ -19,6 +19,12 @@
     margin-bottom: 5px;
 }
 
+.cart-product-title {
+    font-size: 26px;
+    font-weight: bold;
+    color:#e91e63;
+}
+
 .product-price {
     font-size: 16px;
     color: #ff6600; /* Color naranja para el precio */
@@ -29,6 +35,16 @@
     max-height: 100px; /* Define la altura máxima de la imagen */
     margin-left: 20px;
     margin-right: 20px;
+
+    /* Ajustar margen entre las imágenes */
+    vertical-align: middle; /* Opcional: para alinear verticalmente las imágenes */
+}
+
+.product-thumbnail {
+    max-width: 50px; /* Define el ancho máximo de la imagen */
+    max-height: 50px; /* Define la altura máxima de la imagen */
+    margin-left: 5px;
+    margin-right: 5px;
 
     /* Ajustar margen entre las imágenes */
     vertical-align: middle; /* Opcional: para alinear verticalmente las imágenes */
@@ -134,8 +150,8 @@
 
 /* Estilo para el botón "Agregar al Carrito" */
 .add-to-cart-button {
-    background-color: #e91e63; /* Color de fondo personalizable */
-    color: #fff; /* Color del texto */
+    background-color: #69e91e; /* Color de fondo personalizable */
+    color: black;/* Color del texto */
     padding: 10px 20px; /* Espaciado interno del botón */
     font-size: 18px; /* Tamaño de fuente */
     border: none; /* Elimina el borde */
@@ -146,5 +162,32 @@
 
 /* Estilo para el botón al pasar el mouse por encima */
 .add-to-cart-button:hover {
-    background-color: #51c51b; /* Color de fondo al pasar el mouse por encima */
+    background-color: #bdeca7; /* Color de fondo al pasar el mouse por encima */
+}
+
+/* Estilo para el botón "Agregar al Carrito" */
+.remove-from-cart-button {
+    background-color: #f70727; /* Color de fondo personalizable */
+    color: #fff; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno del botón */
+    font-size: 18px; /* Tamaño de fuente */
+    border: none; /* Elimina el borde */
+    border-radius: 5px; /* Borde redondeado */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    transition: background-color 0.3s ease; /* Transición de color de fondo */
+}
+
+/* Estilo para el botón al pasar el mouse por encima */
+.remove-from-cart-button:hover {
+    background-color: #ee9a9a; /* Color de fondo al pasar el mouse por encima */
+}
+
+.total-container {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #fff;
 }

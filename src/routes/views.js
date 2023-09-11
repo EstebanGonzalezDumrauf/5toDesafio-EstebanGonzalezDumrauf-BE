@@ -80,13 +80,32 @@ router.get('/carts/:cid', async (req, res) => {
     try {
         const { cid } = req.params;
         let carrito = await cartModel.findOne({ _id: cid }).populate('arrayCart.product');
-        res.render('cart', {
-            cartProducts: carrito
+        let totalCarrito = 0;
+
+        const cartItems = carrito.arrayCart.map(item => {
+            const subtotal = item.quantity * item.product.price; // Calcula el subtotal
+            totalCarrito += subtotal;
+            return {
+                title: item.product.title,
+                price: item.product.price,
+                quantity: item.quantity,
+                id: item._id,
+                thumbnail: item.product.thumbnail,
+                subtotal: subtotal, // Agrega el subtotal
+                // Agrega más campos si los necesitas
+            };
         });
+
+        console.log(cartItems, totalCarrito);
+
+        res.render('cart', {
+            cartProducts: cartItems,
+            totalCarrito
+        });
+
     } catch (error) {
         console.log(error);
     }
 });
-
 
 export default router;

@@ -12,6 +12,9 @@
 
 
 import mongoose from 'mongoose';
+import {
+    productModel
+} from './product.js';
 
 const cartCollection = 'carts';
 
@@ -21,7 +24,7 @@ const cartSchema = new mongoose.Schema({
             {
                 product: {
                     type: mongoose.Schema.Types.ObjectId,
-                    ref: 'product'
+                    ref: 'products'
                 },
                 quantity: {
                     type: Number,
