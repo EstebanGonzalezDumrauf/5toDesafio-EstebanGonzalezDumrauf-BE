@@ -22,7 +22,19 @@ router.use(session({
     },
 }));
 
-router.get('/products', async (req, res) => {
+const publicAccess = (req, res, next) => {
+    if (req.session.user) return res.redirect('/products');
+    next();
+}
+
+const privateAccess = (req, res, next) => {
+    if (!req.session.user) {
+        return res.redirect('/');
+    }
+    next(); 
+}
+
+router.get('/products', privateAccess, async (req, res) => {
     const {
         page = 1
     } = req.query;
@@ -44,7 +56,6 @@ router.get('/products', async (req, res) => {
 
     const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
-    
 
     // Verificar si el usuario está autenticado antes de mostrar la página de productos
     if (req.session.user) {
@@ -72,7 +83,7 @@ router.get('/products', async (req, res) => {
     });
 })
 
-router.get('/api/products/:pid', async (req, res) => {
+router.get('/api/products/:pid', privateAccess, async (req, res) => {
     try {
         //console.log('Datos recibidos:', pid);
         const productId = req.params.pid;
@@ -107,6 +118,7 @@ router.get('/api/products/:pid', async (req, res) => {
     }
 });
 
+//router.get('/carts/:cid', privateAccess, async (req, res) => {
 router.get('/carts/:cid', async (req, res) => {
     try {
         const { cid } = req.params;

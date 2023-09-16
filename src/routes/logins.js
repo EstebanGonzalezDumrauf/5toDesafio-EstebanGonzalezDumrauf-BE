@@ -10,17 +10,6 @@ import MongoStore from 'connect-mongo';
 
 const router = Router();
 
-//router.use(cookieParser());
-// router.use(session({
-//     store: MongoStore.create({
-//         mongoUrl: 'mongodb+srv://estebangonzalezd:coder1234@clusterestebangonzalezd.wuhulk1.mongodb.net/Ecommerce',
-//         ttl: 5000
-//     }),
-//     secret: "secretCoder",
-//     resave: true,
-//     saveUninitialized: true
-// }));
-
 router.get('/', async (req, res) => {
     res.render('cookies')
 })
@@ -29,6 +18,26 @@ router.post('/cookie', (req, res) => {
     const data = req.body;
     //res.cookie('CoderCookie', data, { maxAge: 100000 }).send({ status: "success", message: "cookie seteada" });
 })
+
+router.post('/logout', (req, res) => {
+    // Verifica si el usuario tiene una sesión válida antes de intentar destruirla
+    if (req.session && req.session.user) {
+        // Destruye la sesión
+        req.session.destroy((err) => {
+            if (err) {
+                console.error('Error al cerrar la sesión:', err);
+                res.status(500).json({ error: 'Error al cerrar la sesión' });
+            } else {
+                // La sesión se ha destruido con éxito
+                res.status(200).json({ message: 'Sesión cerrada exitosamente' });
+            }
+        });
+    } else {
+        // Si no hay una sesión válida, simplemente responde con éxito
+        res.status(200).json({ message: 'No hay sesión para cerrar' });
+    }
+});
+
 
 
 router.post('/session', async (req, res) => {

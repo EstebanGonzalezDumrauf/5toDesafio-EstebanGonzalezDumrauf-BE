@@ -25,7 +25,7 @@ form.addEventListener('submit', (evt) => {
     const obj = {};
 
     data.forEach((value, key) => obj[key] = value);
-    fetch('/registro', { // Cambia la ruta a /session para el inicio de sesión
+    fetch('/registro', {
         method: 'POST', 
         body: JSON.stringify(obj),
         headers: {
@@ -33,17 +33,18 @@ form.addEventListener('submit', (evt) => {
         }
     }).then(result => {
         if (result.status === 200) {
-            // Redireccionar al usuario a la página de productos
+            // Redireccionar al usuario a la página de inicio
+            //res.status(200);
             window.location.href = '/';
-        } else {
-            //console.log('Inicio de sesión fallido');
+        } else if (result.status === 400) {
+            // Usuario ya registrado
             const msjErrorLabel = document.getElementById('msjErrorRegistro');
-            //console.log(result);
             msjErrorLabel.textContent = "Error al registrarse. Ya existe un usuario con ese e-mail.";
+        } else {
+            console.log(result.status);
+            // Manejar otros códigos de estado si es necesario
         }
     }).catch(error => {
         console.error('Error al realizar la solicitud:', error);
     });
-    
-    //.then(result => result.json()).then(json=> console.log(json));
-})
+});

@@ -1,13 +1,15 @@
-<div class="container">
-    <div class="user-session">
-        <p>Bienvenido, <strong>{{user.nombre}} {{user.apellido}}</strong>!!!</p>
-        <p>{{user.rol}}</p>
-    </div>
-    <div class="logout">
-        <form action="{{logout}}" method="post">
-            <input type="hidden">
-            <button class="Log-Out" type="submit">Salir</button>
-        </form>
+<div class="divLoggin">
+    <div class="container">
+        <div class="user-session">
+            <p class="msj-session">Bienvenido, <strong>{{user.nombre}} {{user.apellido}}</strong>!!!</p>
+            <p class="msj-session">{{user.rol}}</p>
+        </div>
+        <div class="logout">
+            <form id="log-out-session-Form" action="{{logout}}" method="post">
+                <input type="hidden">
+                <button class="Log-Out" type="submit">Salir</button>
+            </form>
+        </div>
     </div>
 </div>
 <div class="product-detail-container">
@@ -16,7 +18,7 @@
         <p class="product-detail-description">{{product.description}}</p>
         <p class="product-detail-price"><strong>Precio:</strong> ${{product.price}}</p>
 
-        <form action="{{cartUrl}}" method="post">
+        <form class="add-to-cart-form" action="{{cartUrl}}" method="post">
             <input type="hidden" name="productId" value="{{product._id}}">
             <button class="add-to-cart-button" type="submit">Agregar al Carrito</button>
         </form>
@@ -27,3 +29,4 @@
         {{/each}}
     </div>
 </div>
+<script src="/js/logOutManager.js"></script>

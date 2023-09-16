@@ -24,8 +24,6 @@ router.post('/registro', async (req, res) => {
     let result = await userModel.create({ user, pass, nombre, apellido });
 
     try {
-        //await nuevoUsuario.save();
-        //res.status(201).json({ message: 'Registro exitoso' });
         res.redirect('/'); 
     } catch (error) {
         res.status(500).json({ error: 'Error en el servidor' });

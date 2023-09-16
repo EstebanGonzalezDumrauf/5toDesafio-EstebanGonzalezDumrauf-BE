@@ -1,11 +1,11 @@
 <div class="divLoggin">
     <div class="container">
         <div class="user-session">
-            <p>Bienvenido, <strong>{{user.nombre}} {{user.apellido}}</strong>!!!</p>
-            <p>{{user.rol}}</p>
+            <p class="msj-session">Bienvenido, <strong>{{user.nombre}} {{user.apellido}}</strong>!!!</p>
+            <p class="msj-session">{{user.rol}}</p>
         </div>
         <div class="logout">
-            <form action="{{logout}}" method="post">
+            <form id="log-out-session-Form" action="{{logout}}" method="post">
                 <input type="hidden">
                 <button class="Log-Out" type="submit">Salir</button>
             </form>
@@ -47,7 +47,7 @@
         {{/if}}
     </div>
 </div>
-
+<script src="/js/logOutManager.js"></script>
 
 
 
