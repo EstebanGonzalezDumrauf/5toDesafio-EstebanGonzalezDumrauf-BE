@@ -178,3 +178,144 @@
     margin: 10px 0;
     background-color: #fff;
 }
+
+
+/* ESTO LO AGREGUE PARA EL LOGIN */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 10;
+    padding: 10;
+}
+
+.divLog {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    width: 100%;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+
+/* Estilos para el párrafo con la clase "registro" */
+.registro {
+    text-align: center; /* Centrar el texto */
+    margin-top: 20px; /* Espacio superior */
+    font-size: 16px; /* Tamaño de fuente */
+}
+
+/* Estilos para el enlace "Regístrate" dentro del párrafo con la clase "registro" */
+.registro a {
+    text-decoration: none; /* Eliminar subrayado del enlace */
+    color: #007bff; /* Color del texto del enlace (azul en este caso) */
+    font-weight: bold; /* Texto en negrita */
+    width: 75%;
+}
+
+.registro input {
+    width: 75%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.registro input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    width: 75%;
+}
+
+/* Cambiar el color del enlace al pasar el mouse sobre él */
+.registro a:hover {
+    color: #0056b3; /* Color del texto del enlace al pasar el mouse */
+}
+
+.error-message {
+    color: red; /* Cambia el color del texto a rojo */
+    font-weight: bold; /* Hace el texto en negrita */
+    margin-top: 5px; /* Agrega un margen superior para separarlo de otros elementos */
+    font-size: 12px; /* Tamaño de fuente */
+}
+
+.user-session {
+    text-align: right; /* Alinea el contenido a la derecha */
+    color: blue; /* Cambia el color del texto a rojo */
+}
+
+.container {
+    display: flex;
+    justify-content: flex-end; /* Alinea los elementos a la derecha */
+    align-items: center; /* Centra verticalmente los elementos */
+}
+
+.user-session, .logout {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 20px; /* Espacio entre los divs */
+}
+
+.logout [type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    width: 75%;
+}
+
+/* Cambiar el color del enlace al pasar el mouse sobre él */
+.logout a:hover {
+    color: #0056b3; /* Color del texto del enlace al pasar el mouse */
+}
+
+.divLoggin {
+    max-width: auto;
+    margin: 0 auto;
+    padding: 2px;
+    background-color: #f5d9c9;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+

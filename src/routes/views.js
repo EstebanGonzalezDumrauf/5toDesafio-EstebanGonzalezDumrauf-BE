@@ -7,9 +7,20 @@ import {
 import {
     cartModel
 } from '../dao/models/cart.js';
+import session from 'express-session';
 
 
 const router = Router();
+
+// Configurar el middleware de sesión
+router.use(session({
+    secret: 'tu_secreto_aqui',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 300000, // 5 min
+    },
+}));
 
 router.get('/products', async (req, res) => {
     const {
@@ -33,6 +44,20 @@ router.get('/products', async (req, res) => {
 
     const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
+    
+
+    // Verificar si el usuario está autenticado antes de mostrar la página de productos
+    if (req.session.user) {
+        // Puedes usar req.session.user para acceder a los datos del usuario en cualquier lugar necesario
+        const { username, isAdmin } = req.session.user;
+        //res.render('index', { username, isAdmin }); // Renderiza la página de productos y pasa los datos del usuario
+    } else {
+        // Si el usuario no está autenticado, redirige a la página de inicio de sesión o muestra un mensaje de error
+        return res.redirect('/'); // Cambia '/login' por la ruta correcta de tu página de inicio de sesión
+    }
+
+
+    //console.log(req.session.user);
     res.render('index', {
         docs,
         totalPages,
@@ -42,7 +67,8 @@ router.get('/products', async (req, res) => {
         prevPage,
         prevLink,
         nextLink,
-        pageNumbers
+        pageNumbers, 
+        user: req.session.user
     });
 })
 
@@ -67,8 +93,9 @@ router.get('/api/products/:pid', async (req, res) => {
         }
 
         res.render('detail', {
-            product: productoLimpiado ,
-            cartUrl: '/cart'
+            product: productoLimpiado,
+            cartUrl: '/cart',
+            user: req.session.user
         });
 
     } catch (error) {

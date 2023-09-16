@@ -1,0 +1,20 @@
+    <div>
+        <h1>Iniciar Sesión</h1>
+        <form id="loginForm" method="post" action="/session">
+            <div class="divLog"> 
+                <label for="user">Usuario</label>
+                <input type="text" name="user" id="user" required>
+            <br>
+                <label for="pass">Contraseña</label>
+                <input type="password" name="pass" id="pass" required>
+            <div>
+                <label id="msjError" class="error-message"></label>
+            </div>   
+            </div>
+            <div class="divLog">
+                <input type="submit" value="Iniciar Sesión">
+            </div>         
+        </form>
+        <p class="registro">¿No tienes una cuenta? <a href="/registro">Regístrate</a></p>
+    </div>
+    <script src="/js/cookieManager.js"></script>

@@ -5,7 +5,11 @@ import handlebars from 'express-handlebars';
 import productRouter from './routes/products.js';
 import cartRouter from './routes/carts.js'
 import viewsRouter from './routes/views.js';
+import loginsRouter from './routes/logins.js';
+import registersRouter from './routes/registers.js';
 import mongoose from 'mongoose';
+import session from 'express-session';
+import MongoStore from 'connect-mongo';
 import {
     Server
 } from "socket.io";
@@ -27,15 +31,38 @@ app.use(express.urlencoded({
     extended: true
 }));
 
+app.use(session({
+    store: MongoStore.create({
+        mongoUrl: 'mongodb+srv://estebangonzalezd:coder1234@clusterestebangonzalezd.wuhulk1.mongodb.net/Ecommerce',
+        ttl: 5000
+    }),
+    secret: "secretCoder",
+    resave: false,
+    saveUninitialized: false
+}));
+
 app.use('/', viewsRouter);
+app.use('/', loginsRouter);
+app.use('/', registersRouter);
 app.use('/api/products', productRouter);
 app.use('/api/carts', cartRouter);
 
-const environment = async () => {
-    await mongoose.connect('mongodb+srv://estebangonzalezd:coder1234@clusterestebangonzalezd.wuhulk1.mongodb.net/Ecommerce');
-}
-//mongoose.connect('mongodb+srv://estebangonzalezd:coder1234@clusterestebangonzalezd.wuhulk1.mongodb.net/Ecommerce');
-environment();
+// const environment = async () => {
+//     await mongoose.connect('mongodb+srv://estebangonzalezd:coder1234@clusterestebangonzalezd.wuhulk1.mongodb.net/Ecommerce',{
+//         useNewUrlParser: true,
+//         useUnifiedTopology: true
+//     });
+// }
+// environment();
+
+const connection = mongoose.connect('mongodb+srv://estebangonzalezd:coder1234@clusterestebangonzalezd.wuhulk1.mongodb.net/Ecommerce',{
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+});
+
+
+
+
 
 app.use((err, req, res, next) => {
     console.error('Error no manejado:', err);

@@ -1,0 +1,28 @@
+<div class="registro">
+    <form id="registerForm" method="post" action="/registro">
+        <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" id="nombre" required>
+        </div>
+        <div>
+            <label for="apellido">Apellido:</label>
+            <input type="text" name="apellido" id="apellido" required>
+        </div>
+        <div>
+            <label for="user">Email:</label>
+            <input type="user" name="user" id="user" required>
+        </div>
+        <div>
+            <label for="pass">Contraseña:</label>
+            <input type="password" name="pass" id="pass" required>
+        </div>
+        <div>
+            <input type="submit" value="Registrarse">
+        </div>
+        <div>
+            <label id="msjErrorRegistro" class="error-message"></label>
+        </div>
+    </form>
+</div>
+
+<script src="/js/registerManager.js"></script>
