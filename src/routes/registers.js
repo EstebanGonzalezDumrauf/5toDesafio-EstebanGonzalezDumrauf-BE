@@ -8,7 +8,7 @@ import {
 const router = Router();
 
 router.get('/registro', (req, res) => {
-    res.render('registro'); // Puedes usar un motor de plantillas como EJS o enviar el archivo HTML directamente
+    res.render('registro');
 });
 
 router.post('/registro', async (req, res) => {

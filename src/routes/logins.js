@@ -4,9 +4,6 @@ import {
 import {
     userModel
 } from '../dao/models/user.js';
-import cookieParser from 'cookie-parser';
-import session from 'express-session';
-import MongoStore from 'connect-mongo';
 
 const router = Router();
 
@@ -22,8 +19,7 @@ router.post('/cookie', (req, res) => {
 router.post('/logout', (req, res) => {
     // Verifica si el usuario tiene una sesión válida antes de intentar destruirla
     if (req.session && req.session.user) {
-        // Destruye la sesión
-        req.session.destroy((err) => {
+        req.session.destroy((err) => { // Destruye la sesión
             if (err) {
                 console.error('Error al cerrar la sesión:', err);
                 res.status(500).json({ error: 'Error al cerrar la sesión' });
@@ -33,7 +29,6 @@ router.post('/logout', (req, res) => {
             }
         });
     } else {
-        // Si no hay una sesión válida, simplemente responde con éxito
         res.status(200).json({ message: 'No hay sesión para cerrar' });
     }
 });

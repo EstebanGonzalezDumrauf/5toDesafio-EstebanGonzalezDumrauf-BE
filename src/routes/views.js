@@ -57,18 +57,14 @@ router.get('/products', privateAccess, async (req, res) => {
     const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
 
-    // Verificar si el usuario está autenticado antes de mostrar la página de productos
+    // Verifica que el usuario está autenticado antes de mostrar la página de productos
     if (req.session.user) {
-        // Puedes usar req.session.user para acceder a los datos del usuario en cualquier lugar necesario
         const { username, isAdmin } = req.session.user;
-        //res.render('index', { username, isAdmin }); // Renderiza la página de productos y pasa los datos del usuario
     } else {
-        // Si el usuario no está autenticado, redirige a la página de inicio de sesión o muestra un mensaje de error
-        return res.redirect('/'); // Cambia '/login' por la ruta correcta de tu página de inicio de sesión
+        // Si el usuario no está autenticado, redirige a la página de loggin
+        return res.redirect('/');
     }
 
-
-    //console.log(req.session.user);
     res.render('index', {
         docs,
         totalPages,
@@ -118,8 +114,8 @@ router.get('/api/products/:pid', privateAccess, async (req, res) => {
     }
 });
 
-//router.get('/carts/:cid', privateAccess, async (req, res) => {
-router.get('/carts/:cid', async (req, res) => {
+
+router.get('/carts/:cid', privateAccess, async (req, res) => {
     try {
         const { cid } = req.params;
         let carrito = await cartModel.findOne({ _id: cid }).populate('arrayCart.product');

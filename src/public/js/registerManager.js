@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// Cambia el manejador de eventos submit para que apunte a /session
+
 form.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const data = new FormData(form);
@@ -33,8 +33,6 @@ form.addEventListener('submit', (evt) => {
         }
     }).then(result => {
         if (result.status === 200) {
-            // Redireccionar al usuario a la página de inicio
-            //res.status(200);
             window.location.href = '/';
         } else if (result.status === 400) {
             // Usuario ya registrado
@@ -42,7 +40,6 @@ form.addEventListener('submit', (evt) => {
             msjErrorLabel.textContent = "Error al registrarse. Ya existe un usuario con ese e-mail.";
         } else {
             console.log(result.status);
-            // Manejar otros códigos de estado si es necesario
         }
     }).catch(error => {
         console.error('Error al realizar la solicitud:', error);

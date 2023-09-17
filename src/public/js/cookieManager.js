@@ -33,8 +33,7 @@ form.addEventListener('submit', (evt) => {
         }
     }).then(result => {
         if (result.status === 200) {
-            window.location.href = '/products';
-            //window.location.replace('/products')
+            window.location.href = '/products'; //window.location.replace('/products')
         } else {
             const msjErrorLabel = document.getElementById('msjError');
             msjErrorLabel.textContent = "Usuario no encontrado o contraseña incorrecta";
